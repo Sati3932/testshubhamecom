@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Description</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script src="https://assets.adobedtm.com/21b53c73144b/e99d04cf09ce/launch-f9b9813def87-development.min.js" async></script>
+</head>
+<body>
+    <section id="header">
+        <a href="#" class="logo">E-Com </a>
+        <div class="navbar-right">
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <span id="close" class="material-symbols-outlined">close</span>
+            </ul>
+        </div>
+        <div class="mobile">
+            <a href="cart.html"><span class="material-symbols-outlined">local_mall</span></a>
+            <span id="bar" class="material-symbols-outlined">menu</span>
+        </div>
+    </section>
+
+    <section class="product-description section-p1">
+        <div class="product-container">
+            <img class="product-image" src="" alt="Product Image">
+            <div class="product-details">
+                <h2 class="product-name"></h2>
+                <h4 class="product-brand"></h4>
+                <div class="product-stars"></div>
+                <h3 class="product-price"></h3>
+                <p class="product-description-text">Detailed product description goes here.</p>
+                <button onclick="addToCart()" class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="col">
+            <h2 class="logo">E-Com</h2>
+            <h4>Contact</h4>
+            <p>Address: Address</p>
+            <p>Email: Email</p>
+            <p>Phone: Phone</p>
+        </div>
+        <div class="col">
+            <h4>About</h4>
+            <a href="#">About Us</a>
+            <a href="#">Delivery Options</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">T&C</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fetch product data from localStorage
+            const product = JSON.parse(localStorage.getItem('product'));
+
+            if (product) {
+                // Update the product description page with the product data
+                document.querySelector('.product-image').src = product.image;
+                document.querySelector('.product-name').textContent = product.name;
+                document.querySelector('.product-brand').textContent = product.brand;
+                document.querySelector('.product-price').textContent = product.price;
+                document.querySelector('.product-stars').innerHTML = createStars(product.stars);
+
+                // Push product view event to Adobe Data Layer with simplified product data
+                pushProductEvent(product);
+            } else {
+                // Redirect to the shop page if no product data is found
+                window.location.href = 'shop.html';
+            }
+        });
+
+        // Function to create star elements based on the rating
+        function createStars(starCount) {
+            let stars = '';
+            for (let i = 0; i < starCount; i++) {
+                stars += '<span class="material-symbols-outlined">star</span>';
+            }
+            for (let i = starCount; i < 5; i++) {
+                stars += '<span class="material-symbols-outlined">star_border</span>';
+            }
+            return stars;
+        }
+
+        // Function to add product to cart
+        function addToCart() {
+            const product = JSON.parse(localStorage.getItem('product'));
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Product added to cart');
+        }
+
+        // Function to push simplified product-related events to Adobe Data Layer
+        function pushProductEvent(productData) {
+            window.adobeDataLayer = window.adobeDataLayer || [];
+            window.adobeDataLayer.push({
+                "event": "landed",
+                "eventInfo": {
+                    "eventName": "landed"
+                },
+                "custData": {
+                    "custId": "7236282", // Replace with actual customer ID logic
+                    "loginStatus": "logged in" // Replace with actual login status logic
+                },
+                "page": {
+                    "pageName": "PDP",
+                    "pageType": "PDP",
+                    "language": "English", // Replace with actual language logic
+                    "pincodeStatus": "deliverable" // Replace with actual pincode status logic
+                },
+                "product": [
+                    {
+                        "productName": productData.name,
+                        "productCategory": "Clothing", // Replace with actual product category logic
+                        "productPrice": parseFloat(productData.price.replace('$', '')), // Remove dollar sign and convert to number
+                        "productInStock": "yes" // Replace with actual inStock logic
+                    }
+                ]
+            });
+        }
+    </script>
+</body>
+</html>

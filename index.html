@@ -9,10 +9,9 @@
  <script>
   window.adobeDataLayer = window.adobeDataLayer || [];
 
-  // Retrieve custId from localStorage
-  const custId = localStorage.getItem("custId");
-
-  // Push dynamic custId to adobeDataLayer if exists
+    const custId = localStorage.getItem("custId") || ""; // Default to "guest" if no ID
+        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest"; 
+  
   if (custId) {
     window.adobeDataLayer.push({
       event: "landed",
@@ -21,7 +20,7 @@
       },
       custData: {
         custId: custId,  // Use the dynamic custId
-        loginStatus: "logged in"
+        loginStatus: isLoggedIn
       },
       page: {
         pageName: "Home",

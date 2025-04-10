@@ -62,7 +62,7 @@
 
         // Retrieve the custId and isLoggedIn status from localStorage
         const custId = localStorage.getItem("custId") || "guest"; // Default to "guest" if no ID
-        const isLoggedIn = localStorage.getItem("isLoggedIn") || "false"; // Default to "false" if not logged in
+        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "not logged in"; // Check if true
 
         // Push the collected data to Adobe Data Layer
         window.adobeDataLayer.push({
@@ -71,8 +71,8 @@
             "eventName": "landed"
           },
           "custData": {
-            "custId": custId, // Dynamic custId
-            "loginStatus": isLoggedIn // Dynamic login status
+            "custId": custId, // Dynamic custId (email or unique ID)
+            "loginStatus": isLoggedIn // Set the login status as "logged in" or "not logged in"
           },
           "page": {
             "pageName": "PLP", // Product Listing Page

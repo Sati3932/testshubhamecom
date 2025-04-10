@@ -107,8 +107,8 @@
             alert('Product added to cart');
         }
         
-        const custId = localStorage.getItem("custId") || "guest"; // Default to "guest" if no ID
-        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "not logged in"; 
+        const custId = localStorage.getItem("custId") || ""; // Default to "guest" if no ID
+        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest"; 
 
         // Function to push simplified product-related events to Adobe Data Layer
         function pushProductEvent(productData) {

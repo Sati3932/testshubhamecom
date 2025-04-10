@@ -6,62 +6,76 @@
 <title>MyEcommWebsite - Thank You</title>
 <link rel="stylesheet" href="style.css">
  
-    <script>
-        window.adobeDataLayer = window.adobeDataLayer || [];
-        document.addEventListener('DOMContentLoaded', () => {
-            const cartDetails = JSON.parse(localStorage.getItem('cartDetails'));
-            const totalAmount = localStorage.getItem('totalAmount');
-            const productsToAdd = [];
- 
-            if (cartDetails && totalAmount) {
-                cartDetails.forEach(product => {
-                    productsToAdd.push({
-                        productName: product.name,
-                        productCategory: product.category, // Replace with actual category if available
-                        productId: "ID", // Replace with actual product ID if available
-                        productSize: "Size", // Replace with actual product size if available
-                        productPrice: product.price.replace('$', ''),
-                        productSalePrice: "Sale Price", // Replace with actual sale price if available
-                        productDiscountedPrice: "Discounted Price", // Replace with actual discounted price if available
-                        discountPercentage: "Discount Percentage", // Replace with actual discount percentage if available
-                        productQuantity: "1", // Assuming quantity is 1 per item
-                        productInStock: "Yes", // Replace with actual stock status if available
-                        productVariantId: "Variant ID" // Replace with actual variant ID if available
-                    });
+<script>
+    window.adobeDataLayer = window.adobeDataLayer || [];
+
+    // Function to generate a random order ID
+    function generateOrderId() {
+        // Generate a random order ID (e.g., format: ORD-1234567890)
+        const timestamp = new Date().getTime(); // Get current timestamp (to ensure uniqueness)
+        const randomNum = Math.floor(Math.random() * 1000000); // Generate a random number
+        return `ORD-${timestamp}-${randomNum}`; // Combine timestamp and random number
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const cartDetails = JSON.parse(localStorage.getItem('cartDetails'));
+        const totalAmount = localStorage.getItem('totalAmount');
+        const productsToAdd = [];
+
+        if (cartDetails && totalAmount) {
+            cartDetails.forEach(product => {
+                productsToAdd.push({
+                    productName: product.name,
+                    productCategory: product.category, // Replace with actual category if available
+                    productId: "ID", // Replace with actual product ID if available
+                    productSize: "Size", // Replace with actual product size if available
+                    productPrice: product.price.replace('$', ''),
+                    productSalePrice: "Sale Price", // Replace with actual sale price if available
+                    productDiscountedPrice: "Discounted Price", // Replace with actual discounted price if available
+                    discountPercentage: "Discount Percentage", // Replace with actual discount percentage if available
+                    productQuantity: "1", // Assuming quantity is 1 per item
+                    productInStock: "Yes", // Replace with actual stock status if available
+                    productVariantId: "Variant ID" // Replace with actual variant ID if available
                 });
-             
-                const custId = localStorage.getItem("custId") || ""; // Default to "guest" if no ID
-                const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest"; 
-             
-                window.adobeDataLayer.push({
-                    event: "orderCompleted",
-                    eventInfo: {
-                        eventName: "orderCompleted"
-                    },
-                  custData: {
+            });
+
+            const custId = localStorage.getItem("custId") || ""; // Default to "guest" if no ID
+            const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest"; 
+
+            // Generate the order ID using the random ID generator
+            const orderId = generateOrderId();
+
+            window.adobeDataLayer.push({
+                event: "orderCompleted",
+                eventInfo: {
+                    eventName: "orderCompleted"
+                },
+                custData: {
                     custId: custId, 
                     loginStatus : isLoggedIn 
                 },
-                    order: {
-                        orderId: "12345", 
-                        orderTotal: totalAmount
-                    },
-                    page: {
-                        pageName: "Order Success",
-                        pageType: "Confirmation",
-                        language: "English"
-                    },
-                    product: productsToAdd,
-                    orderSummary: {
-                        totalProductPrice: totalAmount,
-                        totalProductSalePrice: totalAmount, // Assuming no sale price adjustment
-                        totalOrderPrice: totalAmount // Assuming no additional costs like shipping
-                    }
-                });
-              console.log('Adobe Data Layer:', window.adobeDataLayer); 
-            }
-        });
+                order: {
+                    orderId: orderId, // Use the generated order ID here
+                    orderTotal: totalAmount
+                },
+                page: {
+                    pageName: "Order Success",
+                    pageType: "Confirmation",
+                    language: "English"
+                },
+                product: productsToAdd,
+                orderSummary: {
+                    totalProductPrice: totalAmount,
+                    totalProductSalePrice: totalAmount, // Assuming no sale price adjustment
+                    totalOrderPrice: totalAmount // Assuming no additional costs like shipping
+                }
+            });
+            console.log('Adobe Data Layer:', window.adobeDataLayer); 
+        }
+    });
 </script>
+
+ 
 <style>
         .thankyou-container {
             max-width: 600px;

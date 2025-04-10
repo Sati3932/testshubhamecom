@@ -7,8 +7,8 @@
 <link rel="stylesheet" href="style.css">
 <script>
 
-        const custId = localStorage.getItem("custId") || "guest"; // Default to "guest" if no ID
-        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "not logged in"; 
+        const custId = localStorage.getItem("custId") || ""; // Default to "guest" if no ID
+        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest"; 
         
         window.adobeDataLayer = window.adobeDataLayer || [];
         window.adobeDataLayer.push({

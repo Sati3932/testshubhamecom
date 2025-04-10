@@ -644,6 +644,7 @@
 
 
 <script>
+  const custId 
   // Initialize Adobe data layer if not already initialized
   window.adobeDataLayer = window.adobeDataLayer || [];
 
@@ -662,7 +663,7 @@
     // Generate a simple customer ID (timestamp + random) if logged in
     let custData = null;
     if (isLoggedIn === "true" && user) {
-      const custId = "CUST-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
+      const custId = "CUST-" + Date.now() + "-" );
       custData = {
         custId: custId,
         loginStatus: "logged in"

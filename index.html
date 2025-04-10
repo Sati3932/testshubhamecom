@@ -6,65 +6,26 @@
     <title>MyEcommWebsite</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    
-   
-<script>
-    // Initialize Adobe data layer if not already initialized
-    window.adobeDataLayer = window.adobeDataLayer || [];
-
-    // Function to track page name and URL
-    function trackPage() {
-        // Get the current page URL
-        var pageURL = document.URL;
-        
-        // Get the current page title as the page name
-        var pageName = document.title;
-
-        // Dynamically assign page type based on page title or URL
-        var pageType = "Homepage"; // Default type
-        if (pageName.toLowerCase().includes("login")) {
-            pageType = "Login Page";
-        } else if (pageName.toLowerCase().includes("shop")) {
-            pageType = "Shop Page";
-        }
-        // You can add more conditions here for different pages
-
-        // Send the page view data to the Adobe data layer
+    <script>
+        window.adobeDataLayer=window.adobeDataLayer || [];
         window.adobeDataLayer.push({
-            event: "pageView", // Customize event name
+            event: "landed",
+            eventInfo: {
+                eventName: "landed"
+            },
+            custData: {
+                custId: "001",
+                loginStatus: "logged in"
+            },
             page: {
-                pageName: pageName,
-                pageURL: pageURL,
-                pageType: pageType,
-                language: "English" // Modify if needed
+                pageName: "Home",
+                pageType: "Home",
+                language: "English"
             }
         });
+    </script>
 
-        console.log("Page viewed:", pageName, pageURL); // Log for debugging (optional)
-    }
-
-    // Check if user is logged in
-    function checkLoginStatus() {
-        let isLoggedIn = localStorage.getItem("isLoggedIn");
-
-        if (isLoggedIn === "true") {
-            let loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
-            document.getElementById("login-status").textContent = `Welcome, ${loggedUser.email}`;
-            document.getElementById("userlogin").style.display = "none";
-        } else {
-            document.getElementById("userlogin").style.display = "block";
-        }
-    }
-
-    // Combine both functionalities in a single window.onload
-    window.onload = function () {
-        trackPage(); // Track page view
-        checkLoginStatus(); // Check if user is logged in
-    };
-</script>
 <script src="https://assets.adobedtm.com/21b53c73144b/e99d04cf09ce/launch-f9b9813def87-development.min.js" async></script>
-
-    
 
 </head>
 <body>
@@ -666,55 +627,6 @@
         </div>
     
     </footer>
-
-
-<script>
-  // Check if the user is logged in by checking localStorage
-  window.onload = function () {
-    let isLoggedIn = localStorage.getItem("isLoggedIn");
-
-    if (isLoggedIn === "true") {
-      // The user is logged in, fetch the logged-in user data
-      let loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
-
-      // Log user data for debugging (optional)
-      console.log("Logged in user:", loggedUser);
-
-      // Optional: Update UI to reflect that the user is logged in (e.g., show the username or a logout option)
-      document.getElementById("login-status").textContent = `Welcome, ${loggedUser.email}`;
-      
-      // Optionally hide login button if the user is logged in
-      document.getElementById("userlogin").style.display = "none";
-      
-      // Push the user's data into the Adobe data layer
-      window.adobeDataLayer.push({
-        event: "userLoggedIn", // You can choose the appropriate event name
-        user: {
-          custId: loggedUser.custId, // Assuming you have custId stored in loggedUser object
-          email: loggedUser.email,   // Other user details, if necessary
-          name: loggedUser.name,     // Add any other details you'd like to track
-        }
-      });
-
-      console.log("User data pushed to adobeDataLayer:", loggedUser.custId); // Optional debug log
-    } else {
-      // The user is not logged in, show login button
-      document.getElementById("userlogin").style.display = "block";
-    }
-  }
-
-  // Optional: Log out function (to clear the session)
-  function logout() {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("loggedUser");
-
-    // Redirect to the login page or reload the current page
-    window.location.href = "login.html";
-  }
-</script>
-
-
-    
 </body>
 <script type="module" src="script.js"></script>
 </html> 

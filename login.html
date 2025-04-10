@@ -7,6 +7,9 @@
     <title>login page</title>
     <link rel="stylesheet" href="style.css" />
     <script>
+      function generateCustId() {
+  return 'CUST-' + Math.random().toString(36).substr(2, 8).toUpperCase();
+}
       window.adobeDataLayer = window.adobeDataLayer || [];
       window.adobeDataLayer.push({
         event: "landed",

@@ -1,94 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyEcommWebsite</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
- <script>
-  window.adobeDataLayer = window.adobeDataLayer || [];
+    <script>
 
-    const custId = localStorage.getItem("custId") || ""; // Default to "guest" if no ID
+        
+
+ const custId = localStorage.getItem("custId") || ""; // Default to "guest" if no ID
         const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest"; 
-  
-  if (custId) {
-    window.adobeDataLayer.push({
-      event: "landed",
-      eventInfo: {
-        eventName: "landed"
-      },
-      custData: {
-        custId: custId,  // Use the dynamic custId
-        loginStatus: isLoggedIn
-      },
-      page: {
-        pageName: "Home",
-        pageType: "Home",
-        language: "English"
-      }
-    });
-     console.log('Adobe Data Layer:', window.adobeDataLayer); 
-  } else {
-    // If no custId exists, it's a guest user
-    window.adobeDataLayer.push({
-      event: "landed",
-      eventInfo: {
-        eventName: "landed"
-      },
-      custData: {
-        custId: "",  // Guest user
-        loginStatus: "guest"
-      },
-      page: {
-        pageName: "Home",
-        pageType: "Home",
-        language: "English"
-      }
-    });
-  }
-</script>
+
+        
+        window.adobeDataLayer=window.adobeDataLayer || [];
+        window.adobeDataLayer.push({
+            event: "landed",
+            eventInfo: {
+                eventName: "landed"
+            },
+            custData: {
+                custId: custId,
+                loginStatus: isLoggedIn
+            },
+            page: {
+                pageName: "Home",
+                pageType: "Home",
+                language: "English"
+            }
+        });
+    </script>
+
+<script src="https://assets.adobedtm.com/21b53c73144b/e99d04cf09ce/launch-f9b9813def87-development.min.js" async></script>
 
 </head>
 <body>
-    <section id="header">
-        <a href="#" class="logo">E-Com </a>
-        <div class="navbar-right">
-            <ul id="navbar">
-                <li><a class="active" href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <!-- <li><a href="blog.html">Blog</a></li> -->
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                
-                <li><a href="login.html" id="userlogin">Login </a></li>
-                 <li>
-               
-                <button id="logoutButton" onclick="logout()">Logout</button>
-            </li>
-
-                    <span id="close" onclick= "CartClick" class="material-symbols-outlined">
-                        close
-                        </span>
-            </ul>
-        </div>
-
-        <div class="mobile" >
-            <a href="cart.html"><span class="material-symbols-outlined">
-                local_mall
-                </span></i></a>
-            <span id="bar" class="material-symbols-outlined">
-                menu
-                </span>
-        </div>
-    </section>
-    <!-- ....................................................................................................... -->
-
-
-  <section id="header">
+   <section id="header">
     <a href="#" class="logo">E-Com</a>
     <div class="navbar-right">
         <ul id="navbar">
@@ -151,6 +99,44 @@
     }
 </script>
 
+    <!-- ....................................................................................................... -->
+
+
+    <section class="hero">
+        <h4>Trade in Offer</h4>
+        <h2>Best Deals Available</h2>
+        <h2>On all Products</h2>
+        <p>Save more with coupens & up to 70% off!!!</p>
+        <button onclick="window.location.href = 'shop.html'">Shop Here</button>
+    </section>
+<!-- ......................................................................................................... -->
+
+    <section class="feature section-p1">
+        <div class="fe-box">
+            <img src="img/features//f1.png" alt="">
+            <h6>Free Shipping</h6>
+        </div>
+        <div class="fe-box">
+            <img src="img/features//f2.png" alt="">
+            <h6>Online Order</h6>
+        </div>
+        <div class="fe-box">
+            <img src="img/features//f3.png" alt="">
+            <h6>Save Money</h6>
+        </div>
+        <div class="fe-box">
+            <img src="img/features//f4.png" alt="">
+            <h6>Promotions</h6>
+        </div>
+        <div class="fe-box">
+            <img src="img/features//f5.png" alt="">
+            <h6>Happy sell</h6>
+        </div>
+        <div class="fe-box">
+            <img src="img/features//f6.png" alt="">
+            <h6>24/7 Support</h6>
+        </div>
+    </section>
     <!-- ............................................................................................... -->
 
     <section class="product1 section-p1">

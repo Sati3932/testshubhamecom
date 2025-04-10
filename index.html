@@ -664,6 +664,7 @@
     let custData = null;
     if (isLoggedIn === "true" && user) {
       const custId = "CUST-" + Date.now() + "-" );
+      localStorage.setItem("custId",custId);
       custData = {
         custId: custId,
         loginStatus: "logged in"

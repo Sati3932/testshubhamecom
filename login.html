@@ -232,12 +232,13 @@
   </body>
 </html>
 <script src="home.js"></script>
+
 <script>
   document.querySelector("form").addEventListener("submit", checkData);
 
   var data = JSON.parse(localStorage.getItem("account-details")) || [];
 
-function checkData() {
+function checkData(event) {
   event.preventDefault();
   let email = document.getElementById("mail").value;
   let pass = document.getElementById("password").value;
@@ -249,7 +250,11 @@ function checkData() {
   data.map(function (elem) {
     if (elem.email === email && elem.password === pass) {
       alert("You have logged in successfully!");
-      localStorage.setItem("custId", email); // Store the email as custId or a unique ID
+
+      // Generate a unique customer ID (a random number here)
+      const uniqueCustId = generateUniqueId();
+
+      localStorage.setItem("custId", uniqueCustId); // Store the unique customer ID
       localStorage.setItem("isLoggedIn", "true"); // Set login status as true
       window.location.href = "index.html"; // Redirect to the homepage after login
     } else {
@@ -258,4 +263,10 @@ function checkData() {
   });
 }
 
+// Function to generate a unique ID
+function generateUniqueId() {
+  return 'cust-' + Math.floor(Math.random() * 1000000); // Generates a random number between 0 and 999999 and prefixes it with 'cust-'
+}
+
 </script>
+

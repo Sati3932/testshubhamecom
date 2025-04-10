@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 
-    <script>
+<script>
     // Function to toggle login/logout buttons based on login status
     document.addEventListener('DOMContentLoaded', () => {
         const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
@@ -57,30 +57,35 @@
         localStorage.removeItem("custId");
         localStorage.removeItem("isLoggedIn");
 
-        // Update the Adobe Data Layer with the new custData (reset to guest)
+        // Reset Adobe Data Layer immediately after logout
         window.adobeDataLayer = window.adobeDataLayer || [];
-        
-        // Find the last pushed layer and modify only the custData (keeping the rest of the data the same)
-        const lastDataLayer = window.adobeDataLayer[window.adobeDataLayer.length - 1];
-        
-        // Preserve all data in the data layer, but change custData (custId to empty and loginStatus to guest)
-        if (lastDataLayer) {
-            lastDataLayer.custData = {
+
+        // Clear the existing custData in the data layer and reset it
+        window.adobeDataLayer.push({
+            event: "landed",
+            eventInfo: {
+                eventName: "landed"
+            },
+            custData: {
                 custId: "", // Reset custId to empty
                 loginStatus: "guest" // Set loginStatus to "guest"
-            };
-
-            window.adobeDataLayer.push(lastDataLayer); // Push the modified data layer back
-        }
+            },
+            page: {
+                pageName: "Home",
+                pageType: "Home",
+                language: "English"
+            }
+        });
 
         // Notify user about successful logout
         alert("You have been logged out.");
 
-        // Update the UI: Hide logout button and show login button
+        // Update the UI: Hide logout button, show login button
         document.getElementById("userlogin").style.display = "block";
         document.getElementById("logoutButton").style.display = "none";
     }
 </script>
+
 
 
 

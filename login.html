@@ -233,59 +233,56 @@
   // Retrieve the account data from localStorage, fallback to an empty array if not available
   var data = JSON.parse(localStorage.getItem("account-details")) || [];
 
-  function checkData(event) {
-    event.preventDefault();
+function checkData(event) {
+  event.preventDefault();
 
-    // Get the email and password input values
-    let email = document.getElementById("mail").value;
-    let pass = document.getElementById("password").value;
+  let email = document.getElementById("mail").value;
+  let pass = document.getElementById("password").value;
 
-    // Check if both email and password are provided
-    if (email === "" || pass === "") {
-      alert("Please fill all the credentials...");
-      return;
-    }
-
-    // Flag to check if the credentials are valid
-    let found = false;
-
-    // Iterate over the data to find a matching account
-    data.forEach(function (elem) {
-      if (elem.email === email && elem.password === pass) {
-        found = true;
-
-        // Save login status and user details to localStorage
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("loggedUser", JSON.stringify(elem));
-
-        // Store custId if needed separately
-        localStorage.setItem("custId", elem.custId);
-
-        // Log the stored custId (for debugging)
-        console.log("Logged in User's custId:", elem.custId);
-
-        // Push the user data (including custId) to Adobe Data Layer
-        window.adobeDataLayer.push({
-          event: "userLoggedIn", // Customize the event name
-          user: {
-            custId: elem.custId, // Include custId
-            email: elem.email,
-            name: elem.name  // You can include more data if needed
-          }
-        });
-
-        // Log the adobeDataLayer content for debugging (optional)
-        console.log("Adobe Data Layer after login:", window.adobeDataLayer);
-
-        // Redirect to the home page
-        window.location.href = "index.html"; // Ensure this is the correct path
-      }
-    });
-
-    // If credentials were not found, display an error message
-    if (!found) {
-      document.getElementById("head").textContent = "Invalid Credentials"; // Ensure this element exists in the HTML
-    }
+  if (email === "" || pass === "") {
+    alert("Please fill all the credentials...");
+    return;
   }
+
+  let found = false;
+
+  data.forEach(function (elem, index) {
+    if (elem.email === email && elem.password === pass) {
+      found = true;
+
+      // Generate custId if it doesn't exist
+      if (!elem.custId) {
+        elem.custId = generateCustId();
+        data[index] = elem; // update the data array with the new custId
+        localStorage.setItem("account-details", JSON.stringify(data)); // Save updated array
+      }
+
+      // Store login status
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("loggedUser", JSON.stringify(elem));
+      localStorage.setItem("custId", elem.custId); // Optional separate storage
+
+      // Push user info to Adobe Data Layer
+      window.adobeDataLayer.push({
+        event: "userLoggedIn",
+        user: {
+          custId: elem.custId,
+          email: elem.email,
+          name: elem.name || "" // default if name is not defined
+        }
+      });
+
+      console.log("User logged in with custId:", elem.custId);
+      console.log("Adobe Data Layer:", window.adobeDataLayer);
+
+      window.location.href = "index.html";
+    }
+  });
+
+  if (!found) {
+    document.getElementById("head").textContent = "Invalid Credentials";
+  }
+}
+
 </script>
 

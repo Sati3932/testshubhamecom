@@ -28,7 +28,8 @@
             },
             products: [] // Initialize an empty array for products
         });
-
+     console.log('Adobe Data Layer:', window.adobeDataLayer); 
+        
         document.addEventListener('DOMContentLoaded', () => {
             const cartContainer = document.getElementById('cart-container');
             const cart = JSON.parse(localStorage.getItem('cart')) || [];

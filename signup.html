@@ -5,44 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login page</title>
+    <title>Login Page</title>
     <link rel="stylesheet" href="style.css">
-    <script>
-        window.adobeDataLayer=window.adobeDataLayer || [];
-        window.adobeDataLayer.push({
-            event: "landed",
-            eventInfo: {
-                eventName: "landed"
-            },
-            custData: {
-                custId: "001",
-                loginStatus: "logged in"
-            },
-            page: {
-                pageName: "Home",
-                pageType: "Home",
-                language: "English"
-            }
-        });
-    </script>
-<script src="https://assets.adobedtm.com/21b53c73144b/e99d04cf09ce/launch-f9b9813def87-development.min.js" async></script>
-
+    <script src="https://assets.adobedtm.com/21b53c73144b/e99d04cf09ce/launch-f9b9813def87-development.min.js" async></script>
     <style>
         .container {
             width: 40%;
             margin: auto;
             box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
             padding: 30px;
-        }
-
-        #main-container p {
-            color: #088178;
-            font-weight: bold;
-        }
-
-        #main-container h2 {
-            margin-bottom: 30px;
-            color: #088178;
         }
 
         .container input {
@@ -77,9 +48,6 @@
             width: 93%;
             cursor: pointer;
         }
-        hr {
-            margin: auto;
-        }
 
         @media (max-width:799px) {
             .container {
@@ -88,6 +56,65 @@
         }
     </style>
 </head>
+
+<body>
+    <main>
+        <div class="container">
+            <form id="loginForm">
+                <h2>Login</h2>
+                <input type="text" placeholder="Enter your email" id="loginEmail">
+                <input type="password" placeholder="Enter your password" id="loginPassword">
+                <input id="btn" type="submit" value="Login">
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
+
+<script>
+    document.getElementById("loginForm").addEventListener("submit", loginUser);
+
+    function loginUser(event) {
+        event.preventDefault();
+
+        let email = document.getElementById("loginEmail").value;
+        let password = document.getElementById("loginPassword").value;
+
+        let accounts = JSON.parse(localStorage.getItem("account-details")) || [];
+
+        let user = accounts.find(function (account) {
+            return account.email === email && account.password === password;
+        });
+
+        if (user) {
+            let custId = "CUST-" + Date.now();
+
+            window.adobeDataLayer = window.adobeDataLayer || [];
+            window.adobeDataLayer.push({
+                event: "loginSuccess",
+                eventInfo: {
+                    eventName: "loginSuccess"
+                },
+                custData: {
+                    custId: custId,
+                    loginStatus: "logged in"
+                },
+                page: {
+                    pageName: "Login",
+                    pageType: "Authentication",
+                    language: "English"
+                }
+            });
+
+            alert("Login successful!");
+            window.location.href = "index.html";
+        } else {
+            alert("Invalid email or password.");
+        }
+    }
+</script>
+
 
 <body>
     <section id="header">

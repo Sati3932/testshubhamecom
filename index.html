@@ -6,33 +6,15 @@
     <title>MyEcommWebsite</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script>
 
-
-<script>
-    // Function to toggle login/logout buttons based on login status
-    document.addEventListener('DOMContentLoaded', () => {
-        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-        const loginButton = document.getElementById("userlogin");
-        const logoutButton = document.getElementById("logoutButton");
-
-        if (isLoggedIn) {
-            loginButton.style.display = "none"; // Hide login button if logged in
-            logoutButton.style.display = "block"; // Show logout button if logged in
-        } else {
-            loginButton.style.display = "block"; // Show login button if not logged in
-            logoutButton.style.display = "none"; // Hide logout button if not logged in
-        }
         
-        // Push the initial login status to dataLayer
-        updateAdobeDataLayer();
-    });
 
-    // Function to update Adobe Data Layer based on login status
-    function updateAdobeDataLayer() {
-        const custId = localStorage.getItem("custId") || ""; // Default to "" (empty) if no ID
-        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest";
+ const custId = localStorage.getItem("custId") || ""; // Default to "guest" if no ID
+        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest"; 
 
-        window.adobeDataLayer = window.adobeDataLayer || [];
+        
+        window.adobeDataLayer=window.adobeDataLayer || [];
         window.adobeDataLayer.push({
             event: "landed",
             eventInfo: {
@@ -48,45 +30,7 @@
                 language: "English"
             }
         });
-        console.log('Adobe Data Layer:', window.adobeDataLayer);
-    }
-
-    // Logout function to clear localStorage, reset dataLayer custData, and toggle buttons
-    function logout() {
-        // Clear login-related data from localStorage
-        localStorage.removeItem("custId");
-        localStorage.removeItem("isLoggedIn");
-
-        // Reset Adobe Data Layer immediately after logout
-        window.adobeDataLayer = window.adobeDataLayer || [];
-
-        // Clear the existing custData in the data layer and reset it
-        window.adobeDataLayer.push({
-            event: "landed",
-            eventInfo: {
-                eventName: "landed"
-            },
-            custData: {
-                custId: "", // Reset custId to empty
-                loginStatus: "guest" // Set loginStatus to "guest"
-            },
-            page: {
-                pageName: "Home",
-                pageType: "Home",
-                language: "English"
-            }
-        });
-
-        // Notify user about successful logout
-        alert("You have been logged out.");
-
-        // Update the UI: Hide logout button, show login button
-        document.getElementById("userlogin").style.display = "block";
-        document.getElementById("logoutButton").style.display = "none";
-    }
-</script>
-
-
+    </script>
 
 
 </head>

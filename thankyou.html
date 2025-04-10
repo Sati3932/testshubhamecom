@@ -29,7 +29,10 @@
                         productVariantId: "Variant ID" // Replace with actual variant ID if available
                     });
                 });
- 
+             
+                const custId = localStorage.getItem("custId") || ""; // Default to "guest" if no ID
+                const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest"; 
+             
                 window.adobeDataLayer.push({
                     event: "orderCompleted",
                     eventInfo: {

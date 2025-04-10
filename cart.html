@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script>
 
-          const custId = localStorage.getItem("custId") || "guest"; // Default to "guest" if no ID
+        const custId = localStorage.getItem("custId") || "guest"; // Default to "guest" if no ID
         const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "not logged in"; 
         // Initialize Adobe Data Layer
         window.adobeDataLayer = window.adobeDataLayer || [];
@@ -75,10 +75,16 @@
                 proceedButton.id = 'proceed-to-checkout';
                 proceedButton.textContent = 'Proceed to Checkout';
                 proceedButton.addEventListener('click', () => {
-                    // Store cart data and total amount in localStorage for the payment page
-                    localStorage.setItem('cartDetails', JSON.stringify(cart));
-                    localStorage.setItem('totalAmount', totalAmount.toFixed(2));
-                    window.location.href = 'payment.html'; // Redirect to payment page
+                    // Check if user is logged in before proceeding to checkout
+                    if (isLoggedIn !== "logged in") {
+                        alert("You must be logged in to place an order.");
+                        window.location.href = "login.html"; // Redirect to login page if not logged in
+                    } else {
+                        // Store cart data and total amount in localStorage for the payment page
+                        localStorage.setItem('cartDetails', JSON.stringify(cart));
+                        localStorage.setItem('totalAmount', totalAmount.toFixed(2));
+                        window.location.href = 'payment.html'; // Redirect to payment page
+                    }
                 });
                 cartContainer.appendChild(proceedButton);
             }

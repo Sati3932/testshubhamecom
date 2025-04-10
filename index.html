@@ -644,59 +644,48 @@
 
 
 <script>
-  const custId 
-  // Initialize Adobe data layer if not already initialized
-  window.adobeDataLayer = window.adobeDataLayer || [];
+  document.querySelector("form").addEventListener("submit", checkData);
 
-  // Check login status
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
-  const user = JSON.parse(localStorage.getItem("loggedUser"));
+  // Retrieve the account data from localStorage, fallback to an empty array if not available
+  var data = JSON.parse(localStorage.getItem("account-details")) || [];
 
-  // Function to track page name and URL
-  function trackPage() {
-    // Get the current page URL
-    var pageURL = document.URL;
-    
-    // Get the current page title as the page name
-    var pageName = document.title;
+  function checkData(event) {
+    event.preventDefault();
 
-    // Generate a simple customer ID (timestamp + random) if logged in
-    let custData = null;
-    if (isLoggedIn === "true" && user) {
-      const custId = "CUST-" + Date.now() + "-" );
-      localStorage.setItem("custId",custId);
-      custData = {
-        custId: custId,
-        loginStatus: "logged in"
-      };
+    // Get the email and password input values
+    let email = document.getElementById("mail").value;
+    let pass = document.getElementById("password").value;
 
-      // Optionally greet the user on the page
-      const header = document.getElementById("header");
-      const greet = document.createElement("p");
-      greet.style.color = "#088178";
-      greet.style.fontWeight = "bold";
-      greet.textContent = `Welcome back, ${user.email.split('@')[0]}!`;
-      header.appendChild(greet);
+    // Check if both email and password are provided
+    if (email === "" || pass === "") {
+      alert("Please fill all the credentials...");
+      return;
     }
 
-    // Push page view and customer data (if available) into the adobeDataLayer
-    window.adobeDataLayer.push({
-      event: "pageView",
-      page: {
-        pageName: pageName,
-        pageURL: pageURL,
-        pageType: "Homepage", // Customize based on page type
-        language: "English" // Modify if needed
-      },
-      custData: custData // Add customer data if logged in, else null
+    // Flag to check if the credentials are valid
+    let found = false;
+
+    // Iterate over the data to find a matching account
+    data.forEach(function (elem) {
+      if (elem.email === email && elem.password === pass) {
+        found = true;
+
+        // Save login status and user details to localStorage
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("loggedUser", JSON.stringify(elem));
+
+        // Redirect to the home page
+        window.location.href = "index.html"; // Ensure this is the correct path
+      }
     });
 
-    console.log("Page viewed:", pageName, pageURL); // Log for debugging
+    // If credentials were not found, display an error message
+    if (!found) {
+      document.getElementById("head").textContent = "Invalid Credentials"; // Ensure this element exists in the HTML
+    }
   }
-
-  // Call trackPage when the page is loaded
-  window.onload = trackPage;
 </script>
+
 
 
     

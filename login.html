@@ -7,24 +7,27 @@
     <title>login page</title>
     <link rel="stylesheet" href="style.css" />
     <script>
-      window.adobeDataLayer=window.adobeDataLayer || [];
-        window.adobeDataLayer.push({
-            event: "landed",
-            eventInfo: {
-                eventName: "landed"
-            },
-            custData: {
-                custId: "",
-                loginStatus: "guest"
-            },
-            page: {
-                pageName: "Home",
-                pageType: "Home",
-                language: "English"
-            }
-        });
+      window.adobeDataLayer = window.adobeDataLayer || [];
+      window.adobeDataLayer.push({
+        event: "landed",
+        eventInfo: {
+          eventName: "landed"
+        },
+        custData: {
+          custId: "",
+          loginStatus: "guest"
+        },
+        page: {
+          pageName: "Home",
+          pageType: "Home",
+          language: "English"
+        }
+      });
     </script>
-<script src="https://assets.adobedtm.com/21b53c73144b/e99d04cf09ce/launch-f9b9813def87-development.min.js" async></script>
+    <script
+      src="https://assets.adobedtm.com/21b53c73144b/e99d04cf09ce/launch-f9b9813def87-development.min.js"
+      async
+    ></script>
     <style>
       .container {
         width: 40%;
@@ -105,31 +108,24 @@
 
   <body>
     <section id="header">
-        <a href="#" class="logo">E-Com </a>
-        <div class="navbar-right">
-            <ul id="navbar">
-                <li><a class="active" href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <!-- <li><a href="blog.html">Blog</a></li> -->
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                
-                <li><a href="login.html" id="userlogin">Login </a></li>
+      <a href="#" class="logo">E-Com</a>
+      <div class="navbar-right">
+        <ul id="navbar">
+          <li><a class="active" href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="login.html" id="userlogin">Login</a></li>
+          <span id="close" class="material-symbols-outlined">close</span>
+        </ul>
+      </div>
 
-                    <span id="close" class="material-symbols-outlined">
-                        close
-                        </span>
-            </ul>
-        </div>
-
-        <div class="mobile" >
-            <a href="cart.html"><span class="material-symbols-outlined">
-                local_mall
-                </span></i></a>
-            <span id="bar" class="material-symbols-outlined">
-                menu
-                </span>
-        </div>
+      <div class="mobile">
+        <a href="cart.html">
+          <span class="material-symbols-outlined">local_mall</span>
+        </a>
+        <span id="bar" class="material-symbols-outlined">menu</span>
+      </div>
     </section>
     <br /><br /><br /><br />
 
@@ -149,9 +145,7 @@
           />
           <input id="btn" type="submit" value="submit" />
           <div id="last-container">
-            <a href="signup.html"
-              >New User?<span id="create">Create Account</span></a
-            >
+            <a href="signup.html">New User?<span id="create">Create Account</span></a>
           </div>
         </form>
       </div>
@@ -178,14 +172,12 @@
         <img src="img/logo.png" alt="" class="logo" />
         <h4>Contact</h4>
         <p>
-          <strong>Address: </strong> 562 Wellington Road, Street 32, Mumbai
-          India
+          <strong>Address: </strong> 562 Wellington Road, Street 32, Mumbai India
         </p>
         <p><strong>Phone: </strong> +91 12345 67980</p>
         <p><strong>Hours: </strong> 10:00 - 18:00, Mon - Sat</p>
         <div class="follow">
-          <h4>Follw us</h4>
-
+          <h4>Follow us</h4>
           <div class="icon">
             <i class="fab fa-facebook-f"></i>
             <i class="fab fa-twitter"></i>
@@ -199,9 +191,9 @@
       <div class="col">
         <h4>About</h4>
         <a href="#">About Us</a>
-        <a href="#">Delivery Infromation</a>
+        <a href="#">Delivery Information</a>
         <a href="#">Privacy Policy</a>
-        <a href="#">Terms & Condition</a>
+        <a href="#">Terms & Conditions</a>
         <a href="#">Contact Us</a>
       </div>
       <div class="col">
@@ -209,7 +201,7 @@
         <a href="#">Sign In</a>
         <a href="#">View Cart</a>
         <a href="#">My Wishlist</a>
-        <a href="#">Trach My Order</a>
+        <a href="#">Track My Order</a>
         <a href="#">Help</a>
       </div>
       <div class="col install">
@@ -224,13 +216,12 @@
       </div>
 
       <div class="copyright">
-        <p>
-          &copy; 
-        </p>
+        <p>&copy;</p>
       </div>
     </footer>
   </body>
 </html>
+
 <script src="home.js"></script>
 
 <script>
@@ -264,6 +255,12 @@
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("loggedUser", JSON.stringify(elem));
 
+        // Store custId if needed separately (optional step)
+        localStorage.setItem("custId", elem.custId);
+
+        // Log the stored custId (for debugging)
+        console.log("Logged in User's custId:", elem.custId);
+
         // Redirect to the home page
         window.location.href = "index.html"; // Ensure this is the correct path
       }
@@ -275,4 +272,3 @@
     }
   }
 </script>
-

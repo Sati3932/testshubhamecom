@@ -255,11 +255,24 @@
         localStorage.setItem("isLoggedIn", "true");
         localStorage.setItem("loggedUser", JSON.stringify(elem));
 
-        // Store custId if needed separately (optional step)
+        // Store custId if needed separately
         localStorage.setItem("custId", elem.custId);
 
         // Log the stored custId (for debugging)
         console.log("Logged in User's custId:", elem.custId);
+
+        // Push the user data (including custId) to Adobe Data Layer
+        window.adobeDataLayer.push({
+          event: "userLoggedIn", // Customize the event name
+          user: {
+            custId: elem.custId, // Include custId
+            email: elem.email,
+            name: elem.name  // You can include more data if needed
+          }
+        });
+
+        // Log the adobeDataLayer content for debugging (optional)
+        console.log("Adobe Data Layer after login:", window.adobeDataLayer);
 
         // Redirect to the home page
         window.location.href = "index.html"; // Ensure this is the correct path
@@ -272,3 +285,4 @@
     }
   }
 </script>
+

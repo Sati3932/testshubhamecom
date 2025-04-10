@@ -666,7 +666,6 @@
     
     </footer>
 
-
 <script>
   // Check if the user is logged in by checking localStorage
   window.onload = function () {
@@ -676,14 +675,26 @@
       // The user is logged in, fetch the logged-in user data
       let loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
 
-      // You can now use loggedUser data (for example, display username or logout option)
+      // Log user data for debugging (optional)
       console.log("Logged in user:", loggedUser);
 
-      // Optional: Update UI to reflect that the user is logged in (e.g., show logout button)
+      // Optional: Update UI to reflect that the user is logged in (e.g., show the username or a logout option)
       document.getElementById("login-status").textContent = `Welcome, ${loggedUser.email}`;
       
       // Optionally hide login button if the user is logged in
       document.getElementById("userlogin").style.display = "none";
+      
+      // Push the user's data into the Adobe data layer
+      window.adobeDataLayer.push({
+        event: "userLoggedIn", // You can choose the appropriate event name
+        user: {
+          custId: loggedUser.custId, // Assuming you have custId stored in loggedUser object
+         
+          name: loggedUser.name,     // Add any other details you'd like to track
+        }
+      });
+
+      console.log("User data pushed to adobeDataLayer:", loggedUser.custId); // Optional debug log
     } else {
       // The user is not logged in, show login button
       document.getElementById("userlogin").style.display = "block";

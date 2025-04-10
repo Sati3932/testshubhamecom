@@ -641,6 +641,53 @@
         </div>
     
     </footer>
+
+
+    <script>
+  // Check login status
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const user = JSON.parse(localStorage.getItem("loggedUser"));
+
+  if (isLoggedIn === "true" && user) {
+    // Generate a simple customer ID (timestamp + random)
+    const custId = "CUST-" + Date.now() + "-" + Math.floor(Math.random() * 1000);
+
+    // You can optionally show it on the page
+    console.log("Customer ID:", custId);
+
+    // Push to adobeDataLayer
+    window.adobeDataLayer = window.adobeDataLayer || [];
+    window.adobeDataLayer.push({
+      event: "customerLoggedIn",
+      eventInfo: {
+        eventName: "Customer Logged In"
+      },
+      custData: {
+        custId: custId,
+        email: user.email,
+        loginStatus: "logged in"
+      },
+      page: {
+        pageName: document.title,
+        pageType: "Homepage",
+        language: "English"
+      }
+    });
+
+    // Optionally: greet the user on the page
+    const header = document.getElementById("header");
+    const greet = document.createElement("p");
+    greet.style.color = "#088178";
+    greet.style.fontWeight = "bold";
+    greet.textContent = `Welcome back, ${user.email.split('@')[0]}!`;
+    header.appendChild(greet);
+  } else {
+    // User is not logged in — redirect or show guest experience
+    console.log("Guest user. No customer ID generated.");
+  }
+</script>
+
+    
 </body>
 <script type="module" src="script.js"></script>
 </html> 

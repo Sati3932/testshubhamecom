@@ -60,8 +60,8 @@
         });
 
         // Retrieve the custId and isLoggedIn status from localStorage
-        const custId = localStorage.getItem("custId") || "guest"; // Default to "guest" if no ID
-        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "not logged in"; // Check if true
+        const custId = localStorage.getItem("custId") || ""; // Default to "guest" if no ID
+        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest"; // Check if true
 
         // Push the collected data to Adobe Data Layer
         window.adobeDataLayer.push({

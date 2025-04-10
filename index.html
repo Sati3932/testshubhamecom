@@ -666,6 +666,7 @@
     
     </footer>
 
+
 <script>
   // Check if the user is logged in by checking localStorage
   window.onload = function () {
@@ -689,7 +690,7 @@
         event: "userLoggedIn", // You can choose the appropriate event name
         user: {
           custId: loggedUser.custId, // Assuming you have custId stored in loggedUser object
-         
+          email: loggedUser.email,   // Other user details, if necessary
           name: loggedUser.name,     // Add any other details you'd like to track
         }
       });
@@ -710,8 +711,6 @@
     window.location.href = "login.html";
   }
 </script>
-
-
 
 
     

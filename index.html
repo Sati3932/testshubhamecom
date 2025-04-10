@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     
    
-     <script>
+<script>
     // Initialize Adobe data layer if not already initialized
     window.adobeDataLayer = window.adobeDataLayer || [];
 
@@ -20,13 +20,22 @@
         // Get the current page title as the page name
         var pageName = document.title;
 
-        // Optionally, send the page name and URL to your analytics platform (e.g., Adobe Analytics)
+        // Dynamically assign page type based on page title or URL
+        var pageType = "Homepage"; // Default type
+        if (pageName.toLowerCase().includes("login")) {
+            pageType = "Login Page";
+        } else if (pageName.toLowerCase().includes("shop")) {
+            pageType = "Shop Page";
+        }
+        // You can add more conditions here for different pages
+
+        // Send the page view data to the Adobe data layer
         window.adobeDataLayer.push({
             event: "pageView", // Customize event name
             page: {
                 pageName: pageName,
                 pageURL: pageURL,
-                pageType: "Homepage", // You can modify this to be dynamic
+                pageType: pageType,
                 language: "English" // Modify if needed
             }
         });
@@ -34,12 +43,27 @@
         console.log("Page viewed:", pageName, pageURL); // Log for debugging (optional)
     }
 
-    // Call trackPage when the page is loaded
-    window.onload = trackPage;
-</script>
-    
+    // Check if user is logged in
+    function checkLoginStatus() {
+        let isLoggedIn = localStorage.getItem("isLoggedIn");
 
-<script src="https://assets.adobedtm.com/21b53c73144b/e99d04cf09ce/launch-f9b9813def87-development.min.js" async></script>
+        if (isLoggedIn === "true") {
+            let loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+            document.getElementById("login-status").textContent = `Welcome, ${loggedUser.email}`;
+            document.getElementById("userlogin").style.display = "none";
+        } else {
+            document.getElementById("userlogin").style.display = "block";
+        }
+    }
+
+    // Combine both functionalities in a single window.onload
+    window.onload = function () {
+        trackPage(); // Track page view
+        checkLoginStatus(); // Check if user is logged in
+    };
+</script>
+
+    
 
 </head>
 <body>

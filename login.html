@@ -226,7 +226,7 @@
       data.map(function (elem) {
         if (elem.email === email && elem.password === pass) {
           alert("You have logged in successfully!");
-
+          localStorage.setItem("custEmail", email);
           // 🔥 Adobe Data Layer - push email on successful login
           window.adobeDataLayer.push({
             event: "emailCaptured",

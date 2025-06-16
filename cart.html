@@ -56,10 +56,10 @@
 
                     // Push product details to Adobe Data Layer products array
                     window.adobeDataLayer[0].products.push({
-                        name: product.name,
-                        price: parseFloat(product.price.replace('$', '')),
-                        category: "Apparel",
-                        quantity: 1 // Assuming quantity is 1 for each product in cart
+                        productName: product.name,
+                        productPrice: parseFloat(product.price.replace('$', '')),
+                        productCategory: "Apparel",
+                        productQuantity: 1 // Assuming quantity is 1 for each product in cart
                         // Add more product attributes as needed
                     });
                 });

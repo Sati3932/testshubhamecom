@@ -40,7 +40,9 @@
             });
 
             const custId = localStorage.getItem("custId") || ""; // Default to "guest" if no ID
-            const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest"; 
+            const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest";
+            const custEmail = localStorage.getItem("cuatEmail") || "";
+            const custName = localStorage.getItem("custName") || "";
 
             // Generate the order ID using the random ID generator
             const orderId = generateOrderId();
@@ -51,7 +53,9 @@
                     eventName: "orderCompleted"
                 },
                 custData: {
-                    custId: custId, 
+                    custId: custId,
+                    custEmail: custEmail,
+                    custName: custName,
                     loginStatus : isLoggedIn 
                 },
                 order: {

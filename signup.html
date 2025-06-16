@@ -223,7 +223,12 @@
 
         dataArr.push(obj);
         localStorage.setItem("account-details", JSON.stringify(dataArr));
-
+        
+        // ✅ Persist values to use across all pages
+        localStorage.setItem("custId", email);
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("custName", name);
+        
         // ✅ Adobe Data Layer Push
         window.adobeDataLayer.push({
             event: "signupSuccess",

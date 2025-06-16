@@ -130,6 +130,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         
         const custId = localStorage.getItem("custId") || ""; // Default to "guest" if no ID
         const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest"; 
+        const custEmail = localStorage.getItem("cuatEmail") || "";
+        const custName = localStorage.getItem("custName") || "";
 
         // Function to push simplified product-related events to Adobe Data Layer
         function pushProductEvent(productData) {
@@ -141,7 +143,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 },
                 "custData": {
                     "custId": custId, // Replace with actual customer ID logic
+                    "custEmail": custEmail,
+                    "custName": custName,
                     "loginStatus": isLoggedIn // Replace with actual login status logic
+                    
                 },
                 "page": {
                     "pageName": "PDP",

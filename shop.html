@@ -73,6 +73,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         // Retrieve the custId and isLoggedIn status from localStorage
         const custId = localStorage.getItem("custId") || ""; // Default to "guest" if no ID
         const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest"; // Check if true
+        const custEmail = localStorage.getItem("cuatEmail") || "";
+        const custName = localStorage.getItem("custName") || "";
 
         // Push the collected data to Adobe Data Layer
         window.adobeDataLayer.push({
@@ -82,7 +84,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           },
           "custData": {
             "custId": custId, // Dynamic custId (email or unique ID)
+            "custEmail": custEmail,
+            "custName": custName,
             "loginStatus": isLoggedIn // Set the login status as "logged in" or "not logged in"
+            
           },
           "page": {
             "pageName": "PLP", // Product Listing Page

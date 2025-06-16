@@ -7,29 +7,30 @@
     <title>login page</title>
     <link rel="stylesheet" href="style.css" />
     <script>
+      const custId = localStorage.getItem("custId") || "";
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest";
 
-         const custId = localStorage.getItem("custId") || ""; // Default to "guest" if no ID
-        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest"; 
-        
-      window.adobeDataLayer=window.adobeDataLayer || [];
-        window.adobeDataLayer.push({
-            event: "landed",
-            eventInfo: {
-                eventName: "landed"
-            },
-            custData: {
-                custId: custId,
-                loginStatus: isLoggedIn
-            },
-            page: {
-                pageName: "Login",
-                pageType: "Login",
-                language: "English"
-            }
-        });
-       console.log('Adobe Data Layer:', window.adobeDataLayer); 
+      window.adobeDataLayer = window.adobeDataLayer || [];
+      window.adobeDataLayer.push({
+        event: "landed",
+        eventInfo: {
+          eventName: "landed"
+        },
+        custData: {
+          custId: custId,
+          loginStatus: isLoggedIn
+        },
+        page: {
+          pageName: "Login",
+          pageType: "Login",
+          language: "English"
+        }
+      });
+
+      console.log("Adobe Data Layer:", window.adobeDataLayer);
     </script>
     <script src="https://assets.adobedtm.com/21b53c73144b/acd85a86a861/launch-5c38a79f08b9-development.min.js" async></script>
+
     <style>
       .container {
         width: 40%;
@@ -37,17 +38,14 @@
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
         padding: 30px;
       }
-
       #main-container p {
         color: #088178;
         font-weight: bold;
       }
-
       #main-container h2 {
         margin-bottom: 30px;
         color: #088178;
       }
-
       .container input {
         display: block;
         width: 90%;
@@ -57,21 +55,18 @@
         border: none;
         border-bottom: 2px solid #088178;
       }
-
       .container input:hover {
         color: black;
         font-weight: bold;
         border-bottom: 3px solid #088178;
         cursor: pointer;
       }
-
       .container #btn {
         background-color: #1c938b;
         color: white;
         font-weight: 500;
         border-radius: 10px;
       }
-
       .container #btn:hover {
         background-color: #1c938b;
         color: white;
@@ -80,26 +75,21 @@
         width: 93%;
         cursor: pointer;
       }
-
       #last-container {
         text-align: center;
       }
-
       #last-container a {
         text-decoration: none;
         color: black;
       }
-
       #last-container #create {
         color: #088178;
         font-weight: bold;
         cursor: pointer;
       }
-
       hr {
         margin: auto;
       }
-
       @media (max-width: 799px) {
         .container {
           width: 80%;
@@ -110,32 +100,23 @@
 
   <body>
     <section id="header">
-        <a href="#" class="logo">E-Com </a>
-        <div class="navbar-right">
-            <ul id="navbar">
-                <li><a class="active" href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <!-- <li><a href="blog.html">Blog</a></li> -->
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                
-                <li><a href="login.html" id="userlogin">Login </a></li>
-
-                    <span id="close" class="material-symbols-outlined">
-                        close
-                        </span>
-            </ul>
-        </div>
-
-        <div class="mobile" >
-            <a href="cart.html"><span class="material-symbols-outlined">
-                local_mall
-                </span></i></a>
-            <span id="bar" class="material-symbols-outlined">
-                menu
-                </span>
-        </div>
+      <a href="#" class="logo">E-Com</a>
+      <div class="navbar-right">
+        <ul id="navbar">
+          <li><a class="active" href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="login.html" id="userlogin">Login</a></li>
+          <span id="close" class="material-symbols-outlined">close</span>
+        </ul>
+      </div>
+      <div class="mobile">
+        <a href="cart.html"><span class="material-symbols-outlined">local_mall</span></a>
+        <span id="bar" class="material-symbols-outlined">menu</span>
+      </div>
     </section>
+
     <br /><br /><br /><br />
 
     <main>
@@ -146,21 +127,15 @@
             <h2 id="head">Sign In</h2>
           </div>
           <input type="text" placeholder="Enter your email" id="mail" />
-          <input
-            type="password"
-            placeholder="Enter your password"
-            maxlength="7"
-            id="password"
-          />
+          <input type="password" placeholder="Enter your password" maxlength="7" id="password" />
           <input id="btn" type="submit" value="submit" />
           <div id="last-container">
-            <a href="signup.html"
-              >New User?<span id="create">Create Account</span></a
-            >
+            <a href="signup.html">New User? <span id="create">Create Account</span></a>
           </div>
         </form>
       </div>
     </main>
+
     <br /><br />
     <hr color="#088178" width="90%" />
 
@@ -182,15 +157,11 @@
       <div class="col">
         <img src="img/logo.png" alt="" class="logo" />
         <h4>Contact</h4>
-        <p>
-          <strong>Address: </strong> 562 Wellington Road, Street 32, Mumbai
-          India
-        </p>
-        <p><strong>Phone: </strong> +91 12345 67980</p>
-        <p><strong>Hours: </strong> 10:00 - 18:00, Mon - Sat</p>
+        <p><strong>Address:</strong> 562 Wellington Road, Street 32, Mumbai India</p>
+        <p><strong>Phone:</strong> +91 12345 67980</p>
+        <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
         <div class="follow">
-          <h4>Follw us</h4>
-
+          <h4>Follow us</h4>
           <div class="icon">
             <i class="fab fa-facebook-f"></i>
             <i class="fab fa-twitter"></i>
@@ -204,19 +175,21 @@
       <div class="col">
         <h4>About</h4>
         <a href="#">About Us</a>
-        <a href="#">Delivery Infromation</a>
+        <a href="#">Delivery Information</a>
         <a href="#">Privacy Policy</a>
         <a href="#">Terms & Condition</a>
         <a href="#">Contact Us</a>
       </div>
+
       <div class="col">
         <h4>My Account</h4>
         <a href="#">Sign In</a>
         <a href="#">View Cart</a>
         <a href="#">My Wishlist</a>
-        <a href="#">Trach My Order</a>
+        <a href="#">Track My Order</a>
         <a href="#">Help</a>
       </div>
+
       <div class="col install">
         <h4>Install App</h4>
         <p>From App Store or Google Play</p>
@@ -229,49 +202,53 @@
       </div>
 
       <div class="copyright">
-        <p>
-          &copy; 
-        </p>
+        <p>&copy;</p>
       </div>
     </footer>
   </body>
-</html>
-<script src="home.js"></script>
 
-<script>
-  document.querySelector("form").addEventListener("submit", checkData);
+  <script src="home.js"></script>
 
-  var data = JSON.parse(localStorage.getItem("account-details")) || [];
+  <script>
+    document.querySelector("form").addEventListener("submit", checkData);
+    var data = JSON.parse(localStorage.getItem("account-details")) || [];
 
-function checkData(event) {
-  event.preventDefault();
-  let email = document.getElementById("mail").value;
-  let pass = document.getElementById("password").value;
+    function checkData(event) {
+      event.preventDefault();
+      let email = document.getElementById("mail").value;
+      let pass = document.getElementById("password").value;
 
-  if (email == "" || pass == "") {
-    alert("Please fill all the credentials...");
-  }
+      if (email == "" || pass == "") {
+        alert("Please fill all the credentials...");
+        return;
+      }
 
-  data.map(function (elem) {
-    if (elem.email === email && elem.password === pass) {
-      alert("You have logged in successfully!");
+      data.map(function (elem) {
+        if (elem.email === email && elem.password === pass) {
+          alert("You have logged in successfully!");
 
-      // Generate a unique customer ID (a random number here)
-      const uniqueCustId = generateUniqueId();
+          // 🔥 Adobe Data Layer - push email on successful login
+          window.adobeDataLayer.push({
+            event: "emailCaptured",
+            custData: {
+              email: email
+            }
+          });
 
-      localStorage.setItem("custId", uniqueCustId); // Store the unique customer ID
-      localStorage.setItem("isLoggedIn", "true"); // Set login status as true
-      window.location.href = "index.html"; // Redirect to the homepage after login
-    } else {
-      document.getElementById("head").textContent = "Invalid Credentials";
+          // Generate and store customer ID
+          const uniqueCustId = generateUniqueId();
+          localStorage.setItem("custId", uniqueCustId);
+          localStorage.setItem("isLoggedIn", "true");
+
+          window.location.href = "index.html";
+        } else {
+          document.getElementById("head").textContent = "Invalid Credentials";
+        }
+      });
     }
-  });
-}
 
-// Function to generate a unique ID
-function generateUniqueId() {
-  return 'cust-' + Math.floor(Math.random() * 1000000); // Generates a random number between 0 and 999999 and prefixes it with 'cust-'
-}
-
-</script>
-
+    function generateUniqueId() {
+      return "cust-" + Math.floor(Math.random() * 1000000);
+    }
+  </script>
+</html>

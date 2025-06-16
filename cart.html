@@ -10,6 +10,8 @@
 
         const custId = localStorage.getItem("custId") || ""; // Default to "guest" if no ID
         const isLoggedIn = localStorage.getItem("isLoggedIn") === "true" ? "logged in" : "guest"; 
+        const custEmail = localStorage.getItem("cuatEmail") || "";
+        const custName = localStorage.getItem("custName") || "";
         // Initialize Adobe Data Layer
         window.adobeDataLayer = window.adobeDataLayer || [];
         window.adobeDataLayer.push({
@@ -19,6 +21,8 @@
             },
             custData: {
                 custId: custId,
+                custEmail: custEmail,
+                custName:custName,
                 loginStatus: isLoggedIn
             },
             page: {

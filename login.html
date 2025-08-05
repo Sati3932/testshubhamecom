@@ -244,6 +244,22 @@
           localStorage.setItem("custId", uniqueCustId);
           localStorage.setItem("isLoggedIn", "true");
 
+          // 🔥 Adobe Data Layer - push login success event
+          window.adobeDataLayer.push({
+            event: "loginSuccess",
+            eventInfo: {
+              event: "loginSuccess" 
+            },
+            custData: {
+              custEmail: email,
+              custId: localStorage.getItem("custId") || "",
+              linkName: "Login : Submit",
+              custName: localStorage.getItem("custName") || ""
+            }
+          });
+
+          //finishe new code 
+
           window.location.href = "index.html";
         } else {
           document.getElementById("head").textContent = "Invalid Credentials";

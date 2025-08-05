@@ -244,29 +244,6 @@
           localStorage.setItem("custId", uniqueCustId);
           localStorage.setItem("isLoggedIn", "true");
 
-          // 🔥 Adobe Data Layer - push login success event
-          window.adobeDataLayer.push({
-            event: "loginSuccess",
-            eventInfo: {
-              event: "loginSuccess" 
-            },
-            custData: {
-              custEmail: email,
-              custId: localStorage.getItem("custId") || "",
-              custName: localStorage.getItem("custName") || ""
-            },
-            page: {
-              pageName: "Login",
-              pageType: "Login",
-              language: "English"
-            }
-            linkInfo: {
-              linkName: "Login : Submit",
-            }
-          });
-
-          //finishe new code 
-
           window.location.href = "index.html";
         } else {
           document.getElementById("head").textContent = "Invalid Credentials";

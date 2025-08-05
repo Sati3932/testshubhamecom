@@ -1,3 +1,5 @@
+<!-- FULL CODE STARTS HERE -->
+<!-- Login : Code : Demo Prep -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -232,11 +234,30 @@
         if (elem.email === email && elem.password === pass) {
           alert("You have logged in successfully!");
           localStorage.setItem("custEmail", email);
+          
           // 🔥 Adobe Data Layer - push email on successful login
           window.adobeDataLayer.push({
             event: "emailCaptured",
             custData: {
               email: email
+            }
+          });
+
+          // 🔥 Adobe Data Layer - push loginSuccess event
+          window.adobeDataLayer.push({
+            event: "loginSuccess",
+            eventInfo: {
+              event: "loginSuccess"
+            },
+            custData: {
+              custEmail: email,
+              custId: localStorage.getItem("custId") || "",
+              //linkName: "Login : Submit",
+              //email: email,
+              custName: localStorage.getItem("custName") || ""
+            },
+            linkInfo: {
+              linkName: "Login : Success"
             }
           });
 

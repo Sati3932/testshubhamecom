@@ -36,7 +36,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     });
 
     /* 🔵 Page-View Tracking Added */
-    ym(105478276, "hit", window.location.href);
+    window.addEventListener("load", function () {
+    ym(105439071, "hit", window.location.href, {
+        title: document.title   // PAGE NAME
+    });
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/105478276" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->

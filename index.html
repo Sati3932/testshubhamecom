@@ -35,14 +35,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         webvisor:true
     });
 
-    /* 🔵 Page-View Tracking Added */
+    /* Page-View tracking */
     window.addEventListener("load", function () {
-    ym(105439071, "hit", window.location.href, {
-        title: document.title   // PAGE NAME
+        ym(105478276, "hit", window.location.href, {
+            title: document.title
+        });
     });
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/105478276" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/105478276" style="position:absolute; left:-9999px;" alt="" /></div>
+</noscript>
 <!-- /Yandex.Metrika counter -->
+
     <script>        
 
         const custId = localStorage.getItem("custId") || ""; // Default to "guest" if no ID
